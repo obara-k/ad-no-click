@@ -24,3 +24,9 @@ for (let i = 0; i < lnk.length; i++) {
     wrapAd.setAttribute('style','pointer-events:none;opacity:.3;')
   }
 }
+
+
+//
+
+const ads = document.querySelectorAll('.b_ad')
+const ad_list = ads.querySelectorAll('[data-bm]')

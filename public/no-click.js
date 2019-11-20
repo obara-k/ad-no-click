@@ -30,7 +30,6 @@ const googleAds = () => {
 //
 
 const bingAds = () => {
-  console.log('bing')
   const ads = document.querySelectorAll('.b_ad')
   const link_list = document.querySelectorAll('cite')
 
@@ -47,6 +46,17 @@ const bingAds = () => {
   }
 }
 
+const yahooAds = () => {
+  const link_block = document.querySelectorAll('.w .a.cf')
+  for (let i =0; i < link_block.length; i ++) {
+    const uri = link_block[i].innerText
+    const wrapAd = link_block[i].parentElement
+    if (uri.indexOf('shufu-job') != -1 || uri.indexOf('b-style-part') != -1 || uri.indexOf('b-stylejob') != -1 ) {
+      wrapAd.setAttribute('style','pointer-events:none;opacity:.3;')
+    }
+  }
+}
+
 
 const adDisabledSwitch = () => {
   const windowLocation = window.location.href
@@ -56,6 +66,10 @@ const adDisabledSwitch = () => {
 
   if(windowLocation.indexOf('bing') === 12) {
     bingAds()
+  }
+
+  if(windowLocation.indexOf('yahoo') === 15) {
+    yahooAds()
   }
 }
 

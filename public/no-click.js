@@ -51,10 +51,16 @@ const bingAds = () => {
   }
 }
 
-const windowLocation = window.location.href
 
-if (windowLocation.indexOf('google') !== 1) {
-  googleAds()
-} else if (windowLocation.indexOf('bing') !== 1) {
-  bingAds()
+const adDisabledSwitch = () => {
+  const windowLocation = window.location.href
+  if(windowLocation.indexOf('google') === 12) {
+    googleAds()
+  }
+
+  if(windowLocation.indexOf('bing') === 12) {
+    bingAds()
+  }
 }
+
+adDisabledSwitch()

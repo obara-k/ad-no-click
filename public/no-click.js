@@ -15,8 +15,6 @@ const googleAds = () => {
     [data-preconnect-urls="${bstyleJob}"]
     `)
 
-  console.log(lnk)
-
   for (let i = 0; i < lnk.length; i++) {
    const dataUrl = lnk[i].getAttribute('href')
    const wrapAd = lnk[i].parentElement.parentElement
@@ -38,13 +36,11 @@ const bingAds = () => {
 
   for (let i = 0; i < link_list.length; i ++) {
     const uri = link_list[i].innerText
-    console.log(uri)
     const wrapAd = link_list[i].parentElement.parentElement.parentElement
     const link = wrapAd.getElementsByTagName('a')
     if (uri.indexOf('shufu-job') != -1 || uri.indexOf('b-style-part') != -1 || uri.indexOf('b-stylejob') != -1 ) {
-      if(wrapAd.classList.contains('b_algo')) {
-        wrapAd.setAttribute('style','pointer-events:none;opacity:.3;')
-      } else if(wrapAd.classList.contains('b_caption') ){
+      if(wrapAd.classList.contains('b_caption') ){
+        console.log('bg')
         wrapAd.parentElement.setAttribute('style','pointer-events:none;opacity:.3;')
       }
     }

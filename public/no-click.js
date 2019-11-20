@@ -1,3 +1,13 @@
+// ==UserScript==
+// @name         AdClickBlock
+// @namespace   http://*/*
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://*/*
+// @grant        none
+// ==/UserScript==
+
 //no click add shufu-job
 
 const partUrl = 'https://part.shufu-job.jp/'

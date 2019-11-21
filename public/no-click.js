@@ -15,6 +15,8 @@ const staffingUrl = 'https://www.b-style-part.net/'
 const smartcareerUrl = 'https://smartcareer.b-stylejob.jp/'
 const bstyleJob = 'https://www.b-stylejob.jp/'
 
+const bstyleService = ['shufu-job','b-style-part','b-stylejob','b-style']
+
 const googleAds = () => {
   console.log('google')
   const link = document.querySelectorAll('[data-preconnect-urls]')
@@ -40,16 +42,16 @@ const googleAds = () => {
 //
 
 const bingAds = () => {
-  const ads = document.querySelectorAll('.b_ad')
   const link_list = document.querySelectorAll('cite')
 
   for (let i = 0; i < link_list.length; i ++) {
     const uri = link_list[i].innerText
     const wrapAd = link_list[i].parentElement.parentElement.parentElement
-    const link = wrapAd.getElementsByTagName('a')
+    const bool = bstyleService.includes(uri)
+    console.log(bool)
     if (uri.indexOf('shufu-job') != -1 || uri.indexOf('b-style-part') != -1 || uri.indexOf('b-stylejob') != -1 ) {
+      console.log(bstyleService.includes(uri))
       if(wrapAd.classList.contains('b_caption') ){
-        console.log('bg')
         wrapAd.parentElement.setAttribute('style','pointer-events:none;opacity:.3;')
       }
     }
@@ -62,6 +64,7 @@ const yahooAds = () => {
     const uri = link_block[i].innerText
     const wrapAd = link_block[i].parentElement
     if (uri.indexOf('shufu-job') != -1 || uri.indexOf('b-style-part') != -1 || uri.indexOf('b-stylejob') != -1 ) {
+      console.log(bstyleService.indexOf(uri))
       wrapAd.setAttribute('style','pointer-events:none;opacity:.3;')
     }
   }
@@ -69,16 +72,16 @@ const yahooAds = () => {
 
 
 const adDisabledSwitch = () => {
-  const windowLocation = window.location.href
-  if(windowLocation.indexOf('google') === 12) {
+  const windowLocation = window.location.host
+  if(/google/.test(windowLocation)) {
     googleAds()
   }
 
-  if(windowLocation.indexOf('bing') === 12) {
+  if(/bing/.test(windowLocation)) {
     bingAds()
   }
 
-  if(windowLocation.indexOf('yahoo') === 15) {
+  if(/yahoo/.test(windowLocation)) {
     yahooAds()
   }
 }

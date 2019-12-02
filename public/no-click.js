@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AdClickBlock
 // @namespace   http://*/*
-// @version      0.1
+// @version      0.2
 // @description  try to take over the world!
 // @author       You
 // @match        https://*/*
@@ -48,9 +48,7 @@ const bingAds = () => {
     const uri = link_list[i].innerText
     const wrapAd = link_list[i].parentElement.parentElement.parentElement
     const bool = bstyleService.includes(uri)
-    console.log(bool)
     if (uri.indexOf('shufu-job') != -1 || uri.indexOf('b-style-part') != -1 || uri.indexOf('b-stylejob') != -1 ) {
-      console.log(bstyleService.includes(uri))
       if(wrapAd.classList.contains('b_caption') ){
         wrapAd.parentElement.setAttribute('style','pointer-events:none;opacity:.3;')
       }
@@ -64,10 +62,24 @@ const yahooAds = () => {
     const uri = link_block[i].innerText
     const wrapAd = link_block[i].parentElement
     if (uri.indexOf('shufu-job') != -1 || uri.indexOf('b-style-part') != -1 || uri.indexOf('b-stylejob') != -1 ) {
-      console.log(bstyleService.indexOf(uri))
       wrapAd.setAttribute('style','pointer-events:none;opacity:.3;')
     }
   }
+}
+
+const displayAds = () => {
+  const iframes = document.querySelectorAll('iframe')
+  for (let i=0; i < iframes.length; i++){
+    console.log(iframes[i].contentDocument,'iframes')
+  }
+  /*
+  for(let i=0; i < iframes.length; i++) {
+    let adWindow = iframes[i].contentDocument.querySelectorAll('iframe')
+    for (let k=0; k < adWindow.length; k++) {
+      let adw = adWindow[i].contentDocument
+      console.log(adw,'adw')
+    }
+  }*/
 }
 
 
@@ -87,3 +99,4 @@ const adDisabledSwitch = () => {
 }
 
 adDisabledSwitch()
+displayAds()

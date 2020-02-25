@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AdClickBlock
 // @namespace   http://*/*
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://*/*
@@ -57,7 +57,7 @@ const bingAds = () => {
 }
 
 const yahooAds = () => {
-  const link_block = document.querySelectorAll('.w .a.cf')
+  const link_block = document.querySelectorAll('.js-Ad .sw-Card__title .sw-Card__titleInner')
   for (let i =0; i < link_block.length; i ++) {
     const uri = link_block[i].innerText
     const wrapAd = link_block[i].parentElement
@@ -66,22 +66,6 @@ const yahooAds = () => {
     }
   }
 }
-
-const displayAds = () => {
-  const iframes = document.querySelectorAll('iframe')
-  for (let i=0; i < iframes.length; i++){
-    console.log(iframes[i].contentDocument,'iframes')
-  }
-  /*
-  for(let i=0; i < iframes.length; i++) {
-    let adWindow = iframes[i].contentDocument.querySelectorAll('iframe')
-    for (let k=0; k < adWindow.length; k++) {
-      let adw = adWindow[i].contentDocument
-      console.log(adw,'adw')
-    }
-  }*/
-}
-
 
 const adDisabledSwitch = () => {
   const windowLocation = window.location.host
@@ -99,4 +83,3 @@ const adDisabledSwitch = () => {
 }
 
 adDisabledSwitch()
-displayAds()

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         AdClickBlock
 // @namespace   http://*/*
-// @version      0.1
+// @version      0.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://*/*
@@ -14,6 +14,8 @@ const partUrl = 'https://part.shufu-job.jp/'
 const staffingUrl = 'https://www.b-style-part.net/'
 const smartcareerUrl = 'https://smartcareer.b-stylejob.jp/'
 const bstyleJob = 'https://www.b-stylejob.jp/'
+
+const bstyleService = ['shufu-job','b-style-part','b-stylejob','b-style']
 
 const googleAds = () => {
   console.log('google')
@@ -40,16 +42,14 @@ const googleAds = () => {
 //
 
 const bingAds = () => {
-  const ads = document.querySelectorAll('.b_ad')
   const link_list = document.querySelectorAll('cite')
 
   for (let i = 0; i < link_list.length; i ++) {
     const uri = link_list[i].innerText
     const wrapAd = link_list[i].parentElement.parentElement.parentElement
-    const link = wrapAd.getElementsByTagName('a')
+    const bool = bstyleService.includes(uri)
     if (uri.indexOf('shufu-job') != -1 || uri.indexOf('b-style-part') != -1 || uri.indexOf('b-stylejob') != -1 ) {
       if(wrapAd.classList.contains('b_caption') ){
-        console.log('bg')
         wrapAd.parentElement.setAttribute('style','pointer-events:none;opacity:.3;')
       }
     }
@@ -57,7 +57,7 @@ const bingAds = () => {
 }
 
 const yahooAds = () => {
-  const link_block = document.querySelectorAll('.w .a.cf')
+  const link_block = document.querySelectorAll('.js-Ad .sw-Card__title .sw-Card__titleInner')
   for (let i =0; i < link_block.length; i ++) {
     const uri = link_block[i].innerText
     const wrapAd = link_block[i].parentElement
@@ -67,18 +67,17 @@ const yahooAds = () => {
   }
 }
 
-
 const adDisabledSwitch = () => {
-  const windowLocation = window.location.href
-  if(windowLocation.indexOf('google') === 12) {
+  const windowLocation = window.location.host
+  if(/google/.test(windowLocation)) {
     googleAds()
   }
 
-  if(windowLocation.indexOf('bing') === 12) {
+  if(/bing/.test(windowLocation)) {
     bingAds()
   }
 
-  if(windowLocation.indexOf('yahoo') === 15) {
+  if(/yahoo/.test(windowLocation)) {
     yahooAds()
   }
 }
